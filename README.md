@@ -1,7 +1,7 @@
 # Docker_FTP
 Build FTP &amp; SFTP Server with Docker
 
-##使用說明
+## 使用說明
 將專案Clone 下來,執行語法即可。可在Yml內修改FTP Server設定
 
 預設
@@ -10,13 +10,15 @@ User：Fen
 
 Password：870504
 
-－FTP：localhost:2221
+-FTPS:localhost:2220
 
-－SFTP(帳密登入)：localhost:2222
+-FTP：localhost:2221
 
-－SFTP(SSH Key 驗證)：localhost:2223
+-SFTP(帳密登入)：localhost:2222
 
-##使用語法
+-SFTP(SSH Key 驗證)：localhost:2223
+
+## 使用語法
 Start
 ````powershell
 $ docker-compose up
