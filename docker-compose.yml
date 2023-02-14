@@ -1,11 +1,21 @@
 version: '2'
 
 services:
-  ftps:
+  ftp:
     image: stilliard/pure-ftpd
     ports:
       - "2220:21"
       - "30000-30009:30000-30009"
+    environment:
+      PUBLICHOST: "127.0.1.0"
+      FTP_USER_NAME: ftpuser
+      FTP_USER_PASS: 000000
+      FTP_USER_HOME: /home/Fen
+  ftps:
+    image: stilliard/pure-ftpd
+    ports:
+      - "2221:21"
+      - "30010-30019:30010-30019"
     volumes:
 #     Local端存放資料位置
       - "./data:/home/Fen/"
@@ -14,27 +24,17 @@ services:
 #     Local端存放SSL Key位置
       - "./ssl_key:/etc/ssl/private/"
     environment:
-      PUBLICHOST: "localhost"
-      FTP_USER_NAME: Fen
-      FTP_USER_PASS: 870504
+      PUBLICHOST: "127.0.2.0"
+      FTP_USER_NAME: ftpsuser
+      FTP_USER_PASS: 000000
       FTP_USER_HOME: /home/Fen
       ADDED_FLAGS: "--tls=2"
-  ftp:
-    image: stilliard/pure-ftpd
-    ports:
-      - "2221:21"
-      - "30010-30019:30010-30019"
-    environment:
-      PUBLICHOST: "localhost"
-      FTP_USER_NAME: Fen
-      FTP_USER_PASS: 870504
-      FTP_USER_HOME: /home/Fen
-      FTP_PASSIVE_PORTS: "30010:30019"
+
   sftp:
     image: atmoz/sftp
     ports:
         - "2222:22"
-    command: Fen:870504:::upload
+    command: sftpuser:000000:::upload
   sftpssh:
     build:
       context: .
@@ -43,6 +43,6 @@ services:
         - "2223:22"
 #   參數為 User:Password:UID:GID:created RemoteDir
 #   未輸入密碼為只使用private key  登入 
-    command: Fen::::upload
+    command: sshuser::::upload
   
 
